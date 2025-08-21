@@ -1,15 +1,10 @@
-import Image from "next/image";
+import { PrimeiroComponent, ArrowFunction} from '../components/PrimeiroComponent';
 
 export default function Home() {
   return (
-    <div>
-      <main >
-        Hello World!
-      
-      </main>
-      <footer>
+      <>
         
-      </footer>
-    </div>
+      </>
+    
   );
 }
