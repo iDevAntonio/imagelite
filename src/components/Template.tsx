@@ -17,6 +17,7 @@ export const Template: React.FC<TemplateProps> = (props: TemplateProps) => {
     );
 };
 
+
 const Header: React.FC = () => {
     return (
         <header className='bg-gray-800 text-white py-4'>

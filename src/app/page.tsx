@@ -1,4 +1,4 @@
-import { PrimeiroComponent, ArrowFunction} from '../components/PrimeiroComponent';
+import { Template, ImageCard } from '@/components';
 
 export default function Home() {
   return (
