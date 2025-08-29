@@ -2,6 +2,6 @@ export class Image{
     url?: string;
     name?: string;
     extension?: string;
-    size?: string; // in bytes
+    size?: number; // in bytes
     uploadDate?: string;
 }

@@ -24,8 +24,9 @@ export default function GalleryPage() {
   function renderImageCard(image: Image) {
   
     return(
-      <ImageCard key={image.url}
-        name={image.name} src={image.url}
+      <ImageCard
+        key={image.url} name={image.name} 
+        src={image.url} extension={image.extension}
         size={image.size} uploadDate={image.uploadDate}
       />
     )
@@ -62,9 +63,9 @@ export default function GalleryPage() {
       <section className="grid grid-cols-3 gap-6">
 
         {renderImages()}
-        <ImageCard name='App' size='10MB' uploadDate='01/01/2025' src='https://blog.aticamarketing.com.br/content/images/2025/01/Face-Ads-na-pr-tica.png' />
-        <ImageCard name='Tech' size='10MB' uploadDate='01/01/2025' src='https://cdn2.hubspot.net/hubfs/53/alternatives-to-Facebook-Google-and-Amazon-ads.jpg'/>
-        <ImageCard name='ADS' size='10MB' uploadDate='01/01/2025' src='https://influencelogic.com/wp-content/uploads/2022/03/ad.jpeg'/>
+        <ImageCard name='App' size={10000} uploadDate='01/01/2025' src='https://blog.aticamarketing.com.br/content/images/2025/01/Face-Ads-na-pr-tica.png' />
+        <ImageCard name='Tech' size={10000} uploadDate='01/01/2025' src='https://cdn2.hubspot.net/hubfs/53/alternatives-to-Facebook-Google-and-Amazon-ads.jpg'/>
+        <ImageCard name='ADS' size={10000} uploadDate='01/01/2025' src='https://influencelogic.com/wp-content/uploads/2022/03/ad.jpeg'/>
       </section>
     </Template>
   );
