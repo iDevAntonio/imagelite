@@ -11,13 +11,15 @@ export default function GalleryPage() {
   const [images, setImages] = useState<Image[]>([]);
   const [query, setQuery] = useState<string>('');
   const [extension, setExtension] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function searchImages() {
     
-    console.log("Valor digitado: ", query);
+    setLoading(true);
     const result = await useService.buscar(query, extension);
     setImages(result);
-    console.table(result);
+    setLoading(false);
+    
 
   }
 
@@ -39,7 +41,7 @@ export default function GalleryPage() {
     
 
   return (
-    <Template>
+    <Template loading={loading}>
       
       <section className='flex flex-col items-center justify-center my-5'>
         <div className='flex space-x-4'>
