@@ -62,7 +62,7 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <section className="grid grid-cols-3 gap-6">
+      <section className="grid grid-cols-4 gap-6">
 
         {renderImages()}
         <ImageCard name='App' size={10000} uploadDate='01/01/2025' src='https://blog.aticamarketing.com.br/content/images/2025/01/Face-Ads-na-pr-tica.png' />
