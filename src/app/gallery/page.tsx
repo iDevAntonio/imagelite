@@ -1,9 +1,10 @@
 'use client'
 
-import { Template, ImageCard } from '@/components';
+import { Template, ImageCard, Button, InputText} from '@/components';
 import { Image } from '@/resources/image/image.resource';
 import {useImageService} from '@/resources/image/image.service';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function GalleryPage() {
 
@@ -45,9 +46,7 @@ export default function GalleryPage() {
       
       <section className='flex flex-col items-center justify-center my-5'>
         <div className='flex space-x-4'>
-          <input type="text" 
-            onChange={event => setQuery(event.target.value)}
-            className='border px-5 py-2 rounded-lg text-gray-900'/>
+          <InputText placeholder="Type Name or Tags" onChange={event => setQuery(event.target.value)}/>
           <select onChange={event => setExtension(event.target.value)} 
               className='border px-4 py-4 rounded-lg text-gray-900'>    
             <option value={''}>All formats</option>
@@ -55,9 +54,10 @@ export default function GalleryPage() {
             <option value={'JPG'}>JPEG</option>
             <option value={'GIF'}>GIF</option>
           </select>
-          <button onClick={searchImages} className='bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300'>Search</button>
-          <button onClick={searchImages} className='bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition-colors duration-300'>Add New</button>
-
+          <Button style='bg-gray-600 hover:bg-gray-700' label='Search' onClick={searchImages}/>
+          <Link href={'/form'} className='flex items-center'>
+            <Button style='bg-green-700  hover:bg-green-800 py-3.5' label='Add New'/>
+          </Link>
 
         </div>
       </section>
