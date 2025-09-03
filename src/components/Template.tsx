@@ -26,7 +26,7 @@ interface RenderIfProps {
     children: React.ReactNode;
 }
 
-const RenderIf: React.FC<RenderIfProps> = ({condition = true, children}) => {
+export const RenderIf: React.FC<RenderIfProps> = ({condition = true, children}) => {
     if (condition) {
         return children
     }
