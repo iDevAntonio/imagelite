@@ -51,7 +51,7 @@ const Header: React.FC = () => {
     return (
         <header className='bg-gray-800 text-white py-4'>
             <div className='container mx-auto flex justify-between items-center px-4'>
-                <h1 className='text-3x1 font-bold'>imagelite</h1>
+                <h1 className='text-3x1 font-bold'><a href={"/gallery"}>imagelite</a></h1>
             </div>
         </header>
     );
