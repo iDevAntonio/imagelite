@@ -1,12 +1,21 @@
+import { url } from 'inspector';
 import {Image} from './image.resource'
 
 class ImageService{
     baseUrl: string = 'http://localhost:8080/v1/images';
 
-    async buscar(query: string = "", extension: string = "") : Promise<Image[]>{
+    async search(query: string = "", extension: string = "") : Promise<Image[]>{
         const url = `${this.baseUrl}?query=${query}&extension=${extension}`;
         const response = await fetch(url);
         return await response.json();
+    }
+
+    async save(data: FormData) : Promise<string>{
+        const response = await fetch(this.baseUrl, {
+            method: 'POST',
+            body: data
+        });
+        return await response.headers.get('Location') ?? '';
     }
 }
 

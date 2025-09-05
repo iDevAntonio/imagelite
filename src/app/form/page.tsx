@@ -1,6 +1,7 @@
 'use client'
 
 import { InputText, Template, Button, RenderIf } from "@/components"
+import { useImageService } from '@/resources/image/image.service'
 import Link from "next/link"
 import {Form, useFormik} from 'formik';
 import { useState } from "react";
@@ -15,14 +16,30 @@ const formSchema = {name: '', tags: '', file: ''}
 
 export default function FormPage() {
 
+    const [loading, setLoading] = useState(false);
     const [imagePreview, setImagePreview] = useState<string>();
+    const service = useImageService();
 
     const formik = useFormik<FormProps>({
         initialValues: formSchema,
-        onSubmit: (data: FormProps) => {
-            console.log(data)
-        }
-    })
+        onSubmit: handleSubmit
+        })
+
+    async function handleSubmit(data: FormProps) {
+        setLoading(true);
+        
+        const formData = new FormData();
+        formData.append('file', data.file)
+        formData.append('name', data.name)
+        formData.append('tags', data.tags)
+
+        await service.save(formData);
+
+        formik.resetForm();
+        setImagePreview('');
+        setLoading(false);
+    }
+
 
     function onFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
         if (event.target.files) {
@@ -34,7 +51,7 @@ export default function FormPage() {
     }
 
     return (
-        <Template>
+        <Template loading={loading}>
             <section className="flex flex-col items-center justify-center my-5">
                 <h5 className="mt-3 mb-10 text-3x1  font-extrabold tracking-tight text-gray-900">New Image</h5>
                 <form onSubmit={formik.handleSubmit}>

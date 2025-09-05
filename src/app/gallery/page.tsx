@@ -17,7 +17,7 @@ export default function GalleryPage() {
   async function searchImages() {
     
     setLoading(true);
-    const result = await useService.buscar(query, extension);
+    const result = await useService.search(query, extension);
     setImages(result);
     setLoading(false);
     
