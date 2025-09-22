@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer} from 'react-toastify'
+
 interface TemplateProps {
   children: React.ReactNode;
   loading?: boolean;

@@ -58,12 +58,14 @@ export default function FormPage() {
 
                     <div className="grid grid-cols-1">
                         <label className="block text-sm font-medium leading-6 text-gray-700">Name: *</label>
-                        <InputText onChange={formik.handleChange} id="name" placeholder="Type image's name"/>
+                        <InputText onChange={formik.handleChange} id="name"
+                                    value={formik.values.name} placeholder="Type image's name"/>
                     </div>
 
                     <div className="grid grid-cols-1">
                         <label className="block text-sm font-medium leading-6 text-gray-700">Tags: *</label>
-                        <InputText onChange={formik.handleChange} id="tags" placeholder="Ex: tag1, tag2..."/>
+                        <InputText onChange={formik.handleChange} id="tags"
+                                    value={formik.values.tags} placeholder="Ex: tag1, tag2..."/>
                     </div>
 
                     <div className="grid grid-cols-1">
