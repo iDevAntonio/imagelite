@@ -19,6 +19,9 @@ export const Template: React.FC<TemplateProps> = ({children, loading = false}: T
                 {children}        
             </div>
             <Footer />
+            <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false}
+             newestOnTop={false} closeOnClick={true} rtl={false} 
+             pauseOnFocusLoss={false} draggable={false} pauseOnHover={true} theme="dark"/>
         </>
     );
 };
