@@ -1,6 +1,6 @@
 'use client'
 
-import { InputText, Template, Button, RenderIf, useNotification } from "@/components"
+import { InputText, Template, Button, RenderIf, useNotification, FieldError } from "@/components"
 import { useImageService } from '@/resources/image/image.service'
 import Link from "next/link"
 import {Form, useFormik} from 'formik';
@@ -60,11 +60,12 @@ export default function FormPage() {
                         <label className="block text-sm font-medium leading-6 text-gray-700">Name: *</label>
                         <InputText onChange={formik.handleChange} id="name"
                                     value={formik.values.name} placeholder="Type image's name"/>
-                                    <span className="text-red-500">{formik.errors.name}</span>
+                                    <FieldError error={formik.errors.name}/>
                     </div>
 
                     <div className="grid grid-cols-1">
                         <label className="block text-sm font-medium leading-6 text-gray-700">Tags: *</label>
+                        <FieldError error={formik.errors.tags}/>
                         <InputText onChange={formik.handleChange} id="tags"
                                     value={formik.values.tags} placeholder="Ex: tag1, tag2..."/>
                     </div>
@@ -72,7 +73,7 @@ export default function FormPage() {
                     <div className="grid grid-cols-1">
 
                         <label className="block text-sm font-medium leading-6 text-gray-700">Image</label>
-                        <span className="text-red-500">{formik.errors.file}</span>
+                        <FieldError error={formik.errors.file}/>
                         <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                             <div className="text-center">
                                 <RenderIf condition={!imagePreview}>
