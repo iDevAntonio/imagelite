@@ -6,12 +6,13 @@ interface InputTextProps {
     id?: string;
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string;
+    type?: string;
 
 }
 
-export const InputText: React.FC<InputTextProps> = ({style, ...otherProps}: InputTextProps) => {
+export const InputText: React.FC<InputTextProps> = ({style, type = "text", ...otherProps}: InputTextProps) => {
     return(
-            <input type="text" 
+            <input type={type} 
                     {...otherProps}
                     className={`${style} border px-5 py-2 rounded-lg text-gray-900`}/>
     )

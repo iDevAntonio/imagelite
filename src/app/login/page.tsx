@@ -1,15 +1,17 @@
 'use client'
 
-import {RenderIf, Template} from '@/components/'
+import {InputText, RenderIf, Template} from '@/components'
 import {useState} from 'react'
 
 export default function Login() {
+
     const [loading, setLoading] = useState<boolean>(false);
-    const [newUserState, setNewUserState] = useState<boolean>(false);
+    const [newUserState, setNewUserState] = useState<boolean>(true);
+
     return (
         <Template loading={loading}>
 
-            <div className='flex min-h-screen justify-center items-center px-6 py-12 lg:px8'>
+            <div className='flex min-h-screen flex-1 flex-col justify-center items-center px-6 py-12 lg:px8'>
 
                 <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
 
@@ -18,10 +20,40 @@ export default function Login() {
                     </h2>
 
                 </div>
+
                 <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
                     <form className='space-y-6'>
                         <RenderIf condition={newUserState}>
+                            <div>
+                                <label className='block text-sm font-medium leading-6 text-gray-900'>Name: </label>
+                            </div>
+                            <div className='mt-2'>
+                                <InputText style='w-full' placeholder='Name' id='name' />
+                            </div>
+                            
+                        </RenderIf>
 
+                        <div>
+                            <label className='block text-sm font-medium leading-6 text-gray-900'>Email: </label>
+                        </div>
+                        <div className='mt-2'>
+                            <InputText style='w-full' placeholder='Email:' id='email' />
+                        </div>
+
+                        <div>
+                            <label className='block text-sm font-medium leading-6 text-gray-900'>Password: </label>
+                        </div>
+                        <div className='mt-2'>
+                            <InputText type='password' style='w-full' placeholder='Password:' id='password' />
+                        </div>
+                        
+                        <RenderIf condition={newUserState}>
+                            <div>
+                                <label className='block text-sm font-medium leading-6 text-gray-900'>Repeat Password: </label>
+                            </div>
+                            <div className='mt-2'>
+                                <InputText type='password' style='w-full' placeholder='Repeat Password:' id='passwordMatch' />
+                            </div>
                         </RenderIf>
                     </form>
                 </div>
