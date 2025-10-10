@@ -6,7 +6,7 @@ import { LoginForm, validationScheme, formScheme} from './formScheme'
 import { useFormik } from 'formik';
 import { useAuth } from '@/resources';
 import { useRouter } from 'next/navigation'
-import { AcessToken, Credentials } from '@/resources/user/user.resources';
+import { AccessToken, Credentials, User } from '@/resources/user/user.resources';
 
 export default function Login() {
 
@@ -17,7 +17,7 @@ export default function Login() {
     const notification = useNotification();
     const router = useRouter();
 
-    const {values, handleChange, handleSubmit, errors} = useFormik<LoginForm>({
+    const {values, handleChange, handleSubmit, errors, resetForm} = useFormik<LoginForm>({
         initialValues: formScheme,
         validationSchema: validationScheme,
         onSubmit: onSubmit
@@ -27,14 +27,31 @@ export default function Login() {
         if(!newUserState){
             const credentials: Credentials = {
                 email: values.email,
-                password: values.password
-        };
-        try{
-            const acessToken: AcessToken = await auth.authenticate(credentials);
-            router.push('/gallery');
-        } catch(error: any){
-            const message = error?.message;
-            notification.notify(message, 'error');
+                password: values.password };
+            try{
+                const accessToken: AccessToken = await auth.authenticate(credentials);
+                auth.initSession(accessToken);
+                console.log("Valid session?: ", auth.isSessionValid());
+                router.push('/gallery');
+            } catch(error: any){
+                const message = error?.message;
+                notification.notify(message, 'error');
+                }
+        } else {
+            
+            const user: User = { email: values.email, name: values.name!, password: values.password };
+            try{
+
+                await auth.save(user);
+                notification.notify('User created with success! You can login now.', 'success');
+                resetForm();
+                setNewUserState(false);
+            }
+            catch(error: any){
+
+                const message = error?.message;
+                notification.notify(message, 'error');
+
             }
         }
     }
