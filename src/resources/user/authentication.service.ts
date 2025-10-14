@@ -54,6 +54,9 @@ class AuthService {
     }
 
     getUserSession(): UserSessionToken | null {
+        if(typeof window === 'undefined'){
+            return null;
+        }
         const authString = localStorage.getItem(AuthService.AUTH_PARAM);
         if(!authString) {
             return null;
