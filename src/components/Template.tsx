@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { ToastContainer} from 'react-toastify'
 import Link from 'next/link';
@@ -11,21 +12,21 @@ interface TemplateProps {
 
 export const Template: React.FC<TemplateProps> = ({children, loading = false}: TemplateProps) => {
     return (
-        <>
+        <div className='flex flex-col min-h-screen'>
             <Header />
-            <div className={`${loading ? 'animate-pulse': '' } container mx-auto mt-8 px-4`}>
+            <main className={`${loading ? 'animate-pulse': '' } flex-grow container mx-auto mt-8 px-4`}>
                 <RenderIf condition={loading}>
                     <div className='text-center'>
                         <Loading />
                     </div>
                 </RenderIf>
                 {children}        
-            </div>
+            </main>
             <Footer />
             <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false}
              newestOnTop={false} closeOnClick={true} rtl={false} 
              pauseOnFocusLoss={false} draggable={false} pauseOnHover={true} theme="dark"/>
-        </>
+        </div>
     );
 };
 
