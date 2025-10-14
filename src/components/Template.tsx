@@ -1,5 +1,8 @@
 import React from 'react';
 import { ToastContainer} from 'react-toastify'
+import Link from 'next/link';
+import { useAuth } from '@/resources'
+import {useRouter} from 'next/navigation'
 
 interface TemplateProps {
   children: React.ReactNode;
@@ -53,10 +56,34 @@ const Loading: React.FC = () => {
 }
 
 const Header: React.FC = () => {
+    
+    const auth = useAuth();
+    const userName = auth.getUserSession();
+    const router = useRouter();
+
+    function logout() {
+        auth.clearSession();
+        router.push("/login");
+    }
+
     return (
         <header className='bg-gray-800 text-white py-4'>
             <div className='container mx-auto flex justify-between items-center px-4'>
-                <h1 className='text-3x1 font-bold'><a href={"/gallery"}>imagelite</a></h1>
+                <Link href="/gallery">
+                    <h1 className='text-3x1 font-bold'>imagelite</h1>
+                </Link>
+                <RenderIf condition={!!userName}>    
+                    <div className='flex items-center'>
+                        <div className='relative'>
+                            <span className='w-64 px-6 py-3 text-md'>
+                                Hi, {userName?.name}
+                                </span>
+                            <span className='w-64 px-6 py-3 text-sm'>
+                                <a href="#" onClick={logout}>Exit</a>
+                                </span>
+                        </div>
+                    </div>
+                </RenderIf>
             </div>
         </header>
     );

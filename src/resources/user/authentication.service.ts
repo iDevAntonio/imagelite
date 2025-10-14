@@ -76,6 +76,10 @@ class AuthService {
         }
         return false;
     }
+
+    clearSession() {
+        localStorage.removeItem(AuthService.AUTH_PARAM);
+    }
 }
 
 export const useAuth = () => new AuthService();
