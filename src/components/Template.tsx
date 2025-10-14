@@ -70,16 +70,16 @@ const Header: React.FC = () => {
         <header className='bg-gray-800 text-white py-4'>
             <div className='container mx-auto flex justify-between items-center px-4'>
                 <Link href="/gallery">
-                    <h1 className='text-3x1 font-bold'>imagelite</h1>
+                    <h1 className='text-3xl font-bold'>imagelite</h1>
                 </Link>
                 <RenderIf condition={!!userName}>    
                     <div className='flex items-center'>
                         <div className='relative'>
                             <span className='w-64 px-6 py-3 text-md'>
-                                Hi, {userName?.name}
+                                Hi, {userName?.name}!
                                 </span>
-                            <span className='w-64 px-6 py-3 text-sm'>
-                                <a href="#" onClick={logout}>Exit</a>
+                            <span className='w-64 text-md font-bold hover:underline'>
+                                <a className='p-0' href="#" onClick={logout}>Exit</a>
                                 </span>
                         </div>
                     </div>

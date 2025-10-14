@@ -50,19 +50,22 @@ class AuthService {
         }
     }
     setUserSession(userSessionToken: UserSessionToken) {
-        localStorage.setItem(AuthService.AUTH_PARAM, JSON.stringify(userSessionToken));
+        try {
+            localStorage.setItem(AuthService.AUTH_PARAM, JSON.stringify(userSessionToken));
+            } catch (error) {}
     }
 
     getUserSession(): UserSessionToken | null {
-        if(typeof window === 'undefined'){
+        try {
+            const authString = localStorage.getItem(AuthService.AUTH_PARAM);
+            if(!authString) {
+                return null;
+            }
+            const token: UserSessionToken = JSON.parse(authString);
+            return token;
+        } catch (error) {
             return null;
         }
-        const authString = localStorage.getItem(AuthService.AUTH_PARAM);
-        if(!authString) {
-            return null;
-        }
-        const token: UserSessionToken = JSON.parse(authString);
-        return token;
     }
     isSessionValid(): boolean {
         const userSession: UserSessionToken | null = this.getUserSession();
@@ -78,7 +81,9 @@ class AuthService {
     }
 
     clearSession() {
-        localStorage.removeItem(AuthService.AUTH_PARAM);
+        try {
+            localStorage.removeItem(AuthService.AUTH_PARAM);
+        } catch (error) {}
     }
 }
 
