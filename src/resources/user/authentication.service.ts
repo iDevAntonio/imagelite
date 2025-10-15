@@ -2,7 +2,7 @@ import {AccessToken, Credentials, User, UserSessionToken} from './user.resources
 import {jwtDecode} from 'jwt-decode'
 
 class AuthService {
-    baseUrl: string = 'http://localhost:8080/v1/users';
+    baseUrl: string = process.env.NEXT_PUBLIC_API_URL + '/v1/users';
     static AUTH_PARAM: string = "_auth";
 
     async authenticate(credentials: Credentials): Promise<AccessToken> {
@@ -27,8 +27,6 @@ class AuthService {
                 'Content-Type': 'application/json'
             }
         })
-
-        console.log("Responde Auth.save: ", response);
 
         if(response.status == 409){
             const responseError = await response.json();

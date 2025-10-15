@@ -2,7 +2,7 @@ import { Image } from './image.resource'
 import { useAuth } from '@/resources'
 
 class ImageService{
-    baseUrl: string = 'http://localhost:8080/v1/images';
+    baseUrl: string = process.env.NEXT_PUBLIC_API_URL + '/v1/images';
     auth = useAuth();
 
     async search(query: string = "", extension: string = "") : Promise<Image[]>{
